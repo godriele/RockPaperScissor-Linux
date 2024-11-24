@@ -1,0 +1,94 @@
+#!/bin/bash
+
+
+choice=('rock' 'paper' 'scissors')
+found=0
+
+
+echo "Welcome to the Rock Paper, Scissors game"
+echo "You choices are: 'rock', 'paper', scissors'"
+echo "-------------------------------------------"
+
+read -p "Ready to play (y/n): " user_response
+
+if [[ "$user_response" != "y" ]]; then
+	echo "Have a good day"
+	exit 0
+fi
+
+while true; do
+	echo "Opponent: Computer"
+	computer_choice_index=$(( RANDOM % ${#choice[@]} ))
+	computer_choice=${choice[$computer_choice_index]}
+
+	read -p "Choose an option: 'rock', 'paper', 'scissors': "  user_choice
+	
+	for choices in "${choice[@]}"; do 
+	  if [[ "$user_choice" == "$choices" ]]; then
+		  found=1
+		  break
+	  fi 
+	done
+
+	if [[ $found -eq 1 ]]; then
+		echo "Valid Choice"
+	
+	else
+		echo "Invalid choice"
+
+	fi
+
+	echo "------------------------------"
+	if [[ "$user_choice" == "$computer_choice" ]]; then
+		echo "User Choice: "$user_choice""
+		echo "Computer Choice: "$computer_choice""
+		echo "------------------------------"
+		echo "Tie!!"
+	elif [[ "$user_choice" == "rock" ]]; then
+		if [[ "$computer_choice" == "paper" ]]; then
+			echo "User Choice: "$user_choice""
+			echo "COmputer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "Computer Wins"
+		else
+			echo "User Choice: "$user_choice""
+			echo "Computer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "User Wins!"
+		fi
+	elif [[ "$user_choice" == "paper" ]]; then
+		if [[ "$computer_choice" == "scissors" ]]; then
+			echo "User Choice: "$user_choice""
+			echo "Computer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "Computer Wins"
+		else
+			echo "User Choice: "$user_choice""
+			echo "Computer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "User Wins!"
+		fi
+	elif [[ "$user_choice" == "scissors" ]]; then
+		if [[ "$computer_choice" == "rock" ]]; then
+			echo "User Choice: "$user_choice""
+			echo "Computer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "Computer Wins!"
+		else
+			echo "User Choice: "$user_choice""
+			echo "Computer Choice: "$computer_choice""
+			echo "------------------------------"
+			echo "User Wins!"
+		fi
+	else
+		echo "You hacked the script"
+
+	fi
+
+	read -p "Play again (y/n): " user_response
+	if [[ "$user_response" != "y" ]]; then
+		echo "Bye"
+		break
+	fi
+done
+
